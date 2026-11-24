@@ -1458,7 +1458,7 @@ function startGame() {
     clearInterval(timerInterval);
     clearTimeout(spawnTimeout);
     
-   gameLoop();
+   
 
 
 
@@ -1498,7 +1498,7 @@ function endGame() {
 
 
 // Старт
-
+gameLoop();
 
 window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
