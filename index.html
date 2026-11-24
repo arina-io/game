@@ -1134,6 +1134,15 @@ arl.walkCycle = 0;
 
 }
 
+// Ограничение в пределах экрана
+//const half = player.size / 2;
+const half = 0;
+player.x = Math.max(half, Math.min(width - half, player.x));
+player.y = Math.max(half, Math.min(height - half, player.y));
+pila.x = Math.max(half, Math.min(width - half, pila.x));
+pila.y = Math.max(half, Math.min(height - half, pila.y));
+arr.x = Math.max(half, Math.min(width - half, arr.x));
+arl.y = Math.max(half, Math.min(height - half, arl.y));
 
 
 
