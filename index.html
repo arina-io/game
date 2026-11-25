@@ -5,11 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Кирюха-бензопила и Свино-сан</title>
   <style>
+
     * {
       box-sizing: border-box;
       user-select: none;
       -webkit-user-select: none;
     }
+
+
+
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url('fonts/Segoe UI.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
 
       html, body {
       margin: 0;
@@ -17,7 +32,7 @@
       width: 100%;
       height: 100%;     
       color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
     }
 
@@ -49,12 +64,12 @@
     /* Игровое поле */
     #game-container {
      position: relative;
-    // top: -45px;
+    
       width: 100%;
       height: 100%;
       background: #667C26;
       overflow: hidden;
-      //touch-action: none;
+      
     }
 
 
@@ -83,22 +98,28 @@
 } 
 
 
+#img-container img{
+top: 45px;    
+} 
+
+
+
 #restartBtn {
             position: absolute;
             bottom: 15px;
-            //padding: 0px 0px;
+            padding: 1%;
             font-size: 20px;
             background: #CC3300;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             font-weight: bold;
             width: 20%;
-min-width: 300px;
+            min-width: 300px;
            
-            height: 80px;
+            
             z-index: 6;
 box-shadow: 0px 6px 4px #000;
         }
@@ -174,6 +195,17 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: none !important;
   }
 }
+
+
+@media screen and (max-width: 370px) {
+  .hud-group {
+    gap: 15px;
+  }
+#hud {
+font-size: 17px;
+}
+}
+
 
 
 
@@ -1031,8 +1063,8 @@ if (isGameOver) return;
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         angle: angle, // запоминаем направление для растяжения
-      radius: 10 + Math.random() * 20,
-      stretch: 1.2 + Math.random() * 0.8, // коэффициент вытягивания
+      radius: (10 + Math.random() * 20)*scaler,
+      stretch: (1.2 + Math.random() * 0.8)*scaler, // коэффициент вытягивания
       wobbleSpeed: 0.05 + Math.random() * 0.1, // скорость «дрожания» формы
       wobblePhase: Math.random() * Math.PI * 2,
       points: points,
@@ -1091,10 +1123,10 @@ function update() {
 
 
 // Адаптивный размер игрока под экран 
-player.size = Math.max(70, Math.min(width, height) * 0.5);
-pila.size = Math.max(70, Math.min(width, height) * 0.5);
-arr.size = Math.max(70, Math.min(width, height) * 0.5);
-arl.size = Math.max(70, Math.min(width, height) * 0.5);
+player.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
+pila.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
+arr.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
+arl.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
 
 
 
@@ -1357,8 +1389,8 @@ ctx.restore();
 
 
 // Отрисовка анимированных зубьев
-const vibX = (Math.random() - 0.5) * 3;
-const vibY = (Math.random() - 0.5) * 3;
+const vibX = ((Math.random() - 0.5) * 3)*scaler;
+const vibY = ((Math.random() - 0.5) * 3)*scaler;
 
 ctx.save();
 ctx.translate(player.x, player.y + vibX + vibY);
@@ -1371,7 +1403,7 @@ ctx.translate(player.x, player.y + vibX + vibY);
     ctx.rotate(Math.sin(((15 - player.swingTimer) / 15) * Math.PI) * 0.005);
   }
 
-  const scale = Math.max(70, Math.min(width, height) * 0.5) / 125;
+  const scale = (Math.max(70, Math.min(width, height) * 0.7) / 125)*scaler;
   ctx.scale(scale, scale);
 
   const svgSize = 125;
@@ -1515,7 +1547,7 @@ window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
 scaler = Math.min(Math.max(window.innerWidth / BASE_WIDTH, 0.7), 5);
-alert (width);
+
 });
 
 restartBtn.addEventListener('click', () => {
