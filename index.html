@@ -1123,10 +1123,10 @@ function update() {
 
 
 // Адаптивный размер игрока под экран 
-player.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
-pila.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
-arr.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
-arl.size = (Math.max(70, Math.min(width, height) * 0.7))*scaler;
+player.size = (Math.min(550, Math.min(width, height) * 0.7))*scaler;
+pila.size = (Math.min(550, Math.min(width, height) * 0.7))*scaler;
+arr.size = (Math.min(550, Math.min(width, height) * 0.7))*scaler;
+arl.size = (Math.min(550, Math.min(width, height) * 0.7))*scaler;
 
 
 
@@ -1403,7 +1403,7 @@ ctx.translate(player.x, player.y + vibX + vibY);
     ctx.rotate(Math.sin(((15 - player.swingTimer) / 15) * Math.PI) * 0.005);
   }
 
-  const scale = (Math.max(70, Math.min(width, height) * 0.7) / 125)*scaler;
+  const scale = (Math.min(550, Math.min(width, height) * 0.7) / 125)*scaler;
   ctx.scale(scale, scale);
 
   const svgSize = 125;
