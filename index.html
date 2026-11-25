@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Segoe UI';
-  src: url('fonts/Segoe UI.ttf') format('ttf');
+  src: url('fonts/segoeuib.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -1032,15 +1032,20 @@ if (isGameOver) return;
 // --- СПАВН СВИНЕЙ ---
   function spawnMole() {
 if (isGameOver) return;
-    const margin = 60;
-    const moleSize = Math.max(50, Math.min(width, height) * 0.1);
+    const baseSize = Math.max(50, Math.min(width, height) * 0.1);
+   
+const moleSize = (baseSize + Math.random() * 130) * scaler;
+const halfSize = moleSize / 2;
+ const availableWidth = Math.max(0, width - moleSize);
+  const availableHeight = Math.max(0, height - moleSize);
+
       moles.push({
-      x: margin + Math.random() * (width - margin * 2),
-      y: margin + Math.random() * (height - margin * 2),
-      size: (moleSize + Math.random() * 130)* scaler,
+      x: halfSize + Math.random() * availableWidth,
+      y: halfSize + Math.random() * availableHeight,
+      size: moleSize,
      flipX: Math.random() < 0.5,
-     life: 120 + Math.random() * 120, // Сколько кадров свин сидит на поверхности
-    // scale: 0,
+     life: 250 + Math.random() * 120, // Сколько кадров свин сидит на поверхности
+    
 
     });
   }
@@ -1224,16 +1229,17 @@ spawnTimer = Math.max(35, 90 - score * 1.5); // Чем больше счёт, т
 
 // Координата лезвия бензопилы
 const reach = player.size * 0.5;
-const bladeWidth = reach;
-//const bladeX = player.x + (player.facingRight ? reach : -reach);
+
+const bladeWidth = player.size / 4;
+const bladeRadius = bladeWidth / 2;
+const offset = reach - bladeRadius; 
+//alert (offset);
 
 const bladeX = player.facingRight 
-  ? player.x + bladeWidth
-  : player.x - bladeWidth;
+  ? player.x + offset
+  : player.x - offset;
 
-
-//const bladeY = player.y + Math.sin(player.swingAngle) * 20;
-const bladeY = player.y - (player.size * 0.2) + Math.sin(player.swingAngle) * 20;
+const bladeY = player.y - (player.size / 6) + Math.sin(player.swingAngle) * (20*scaler);
 
 
 
@@ -1248,16 +1254,13 @@ m.life--;
 
 
 
-// Плавное появление из норы
-if (m.scale < 1) m.scale = Math.min(1, m.scale + 0.1);
-
-
-
 // Проверка попадания бензопилой (во время взмаха или вплотную)
 const dist = Math.hypot(bladeX - m.x, bladeY - m.y);
-const hitRadius = (m.size * 0.5) + (player.swingTimer > 0 ? 35 : 15);
+const hitRadius = (m.size * 0.5) + (player.swingTimer > 0 ? 55 : 7);
 if (dist < hitRadius) {
+ //console.log("Убит свин:", m, "Дистанция:", dist, "Радиус:", hitRadius);
 // Убийство свина!
+//alert (hitRadius);
 hitSound.currentTime = 0; // Сбрасываем на начало, если звук еще играет от прошлого удара
 hitSound.play().catch(e => console.log("Автовоспроизведение заблокировано:", e));
 
