@@ -65,7 +65,7 @@
 
     .hud-group {
       display: flex;
-      gap: 20px;
+      //gap: 15px;
       align-items: center;
     }
 
@@ -227,9 +227,9 @@ font-size: 17px;
 
    <div id="hud">
     <div class="hud-group">
-      <span>Счёт: <span id="score">0</span></span>
+      <span>Счёт: <span id="score">0&nbsp;&nbsp;&nbsp;</span></span>
       <span>Рекорд: <span id="highscore">0</span></span>
- <span>Время: <span id="time">180</span> сек</div>
+      <span>Время: <span id="time">180</span> сек</div>
     </div>
   
   </div>
@@ -276,7 +276,7 @@ let isGameOver = true;
 let timerInterval;
 let spawnTimeout;
   let highScore = localStorage.getItem('moleChainsawHigh') || 0;
-  document.getElementById('highscore').textContent = highScore;
+  document.getElementById('highscore').textContent = highScore + '\u00A0' + '\u00A0' + '\u00A0';
 
 
 
@@ -1158,7 +1158,7 @@ if (pointerTarget) {
 const distX = pointerTarget.x - player.x;
 const distY = pointerTarget.y - player.y;
 const dist = Math.hypot(distX, distY);
-if (dist > 10) {
+if (dist > 0) {
 dx = distX / dist;
 dy = distY / dist;
 }
@@ -1265,7 +1265,7 @@ m.life--;
 
 // Проверка попадания бензопилой (во время взмаха или вплотную)
 const dist = Math.hypot(bladeX - m.x, bladeY - m.y);
-const hitRadius = (m.size * 0.3) + (player.swingTimer > 0 ? (player.size / 20) : (player.size / 140));
+const hitRadius = (m.size * 0.5) + (player.swingTimer > 0 ? (player.size / 20) : (player.size / 140));
 //const hitRadius = (m.size * 0.5) + (player.swingTimer > 0 ? (player.size / 10) : (player.size / 70));
 if (dist < hitRadius) {
  //console.log("Убит свин:", m, "Дистанция:", dist, "Радиус:", hitRadius);
@@ -1277,11 +1277,11 @@ createSplatter(m.x, m.y);
 moles.splice(i, 1);
 score++;
 shakeTime = 8;
-document.getElementById('score').textContent = score;
+document.getElementById('score').textContent = score + '\u00A0' + '\u00A0' + '\u00A0';
 if (score > highScore) {
 highScore = score;
 localStorage.setItem('moleChainsawHigh', highScore);
-document.getElementById('highscore').textContent = highScore;
+document.getElementById('highscore').textContent = highScore + '\u00A0' + '\u00A0' + '\u00A0';
 }
 continue;
 }
@@ -1519,7 +1519,7 @@ function startGame() {
     timeLeft = 180;
     isGameOver = false;
     particles = [];
-    scoreEl.innerText = score;
+    scoreEl.innerText = score + '\u00A0' + '\u00A0' + '\u00A0';
     timeEl.innerText = timeLeft;
     restartBtn.style.display = 'none';
     imgcontainer.style.display = 'none';
