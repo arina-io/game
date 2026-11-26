@@ -1158,7 +1158,7 @@ if (pointerTarget) {
 const distX = pointerTarget.x - player.x;
 const distY = pointerTarget.y - player.y;
 const dist = Math.hypot(distX, distY);
-if (dist > 0) {
+if (dist > 10*scaler) {
 dx = distX / dist;
 dy = distY / dist;
 }
