@@ -55,7 +55,7 @@
       width: 100%;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 10px 10px;
       background: #2f3640;
       border-bottom: 3px solid #e84118;
       font-size: 18px;
@@ -1044,9 +1044,9 @@ if (isGameOver) return;
 // --- СПАВН СВИНЕЙ ---
   function spawnMole() {
 if (isGameOver) return;
-    const baseSize = Math.max(50, Math.min(width, height) * 0.1);
+    const baseSize = (Math.max(50, Math.min(width, height) * 0.1)) * scaler;
    
-const moleSize = (baseSize + Math.random() * 130) * scaler;
+const moleSize = (baseSize + Math.random() * (100 * scaler));
 const halfSize = moleSize / 2;
  const availableWidth = Math.max(0, width - moleSize);
   const availableHeight = Math.max(0, height - moleSize);
